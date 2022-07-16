@@ -19,11 +19,11 @@ let diffOptions = {
  * @param {string} str 加密内容
  */
 const md5 = function(str) {
+  
   return md5JS(`${diffOptions.projectName}::${str}`);
 }
 
 /**
- * @test id
  * @description 对比历史记录，生成差异分析报告  
  */
 const generateDiffReport = function(fileMap, lastFileMap) {

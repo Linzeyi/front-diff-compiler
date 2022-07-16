@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "diff": "node ./diff.config.js",
+    "doc": "jsdoc -r -c .jsdoc.conf.json",
     "serve": "npm run diff && nyc webpack-dev-server",
     "build": "npm run diff && nyc webpack build --mode production"
   },
@@ -30,6 +31,9 @@
   },
   "dependencies": {
     "@babel/traverse": "^7.18.8",
+    "jsdoc": "^3.6.10",
+    "jsdoc-vuejs": "^4.0.0",
+    "minami": "^1.2.3",
     "vue": "^2.6.14"
   }
 }
