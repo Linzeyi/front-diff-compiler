@@ -1,4 +1,6 @@
 var compiler = require("vue-template-compiler");
+const diffCompiler = require("./build");
+const nodePath = require("path");
 const fomartTestIdArr = function (arr) {
   let tmp = [];
   arr.forEach((item) => {
@@ -16,26 +18,9 @@ exports.handlers = {
       e.source = output.script ? output.script.content : "";
     }
   },
-  // //
-  // parseBegin: function (e) {
-  //   console.log(e, 'parseBegin?!@?#!@?#@?')
-  // },
-  // //
-  // fileBegin: function (e) {
-  //   console.log(e, 'fileBegin?!@?#!@?#@?')
-  // },
-  // //
-  // jsdocCommentFound: function (e) {
-  //   console.log(e, 'jsdocCommentFound?!@?#!@?#@?')
-  // },
-  // //
-  // symbolFound: function (e) {
-  //   console.log(e, 'jsdocCommentFound?!@?#!@?#@?')
-  // },
-  //
   newDoclet: function (e) {
     const { doclet } = e;
-    const { path } = doclet.meta;
+    const { path, filename } = doclet.meta;
     const type = doclet.meta.code.type;
     const funName = doclet.name;
     const undocumented = doclet.undocumented;
@@ -52,39 +37,29 @@ exports.handlers = {
           })
         );
       const testJson = {
-        path,
+        path: nodePath.resolve(path, filename).replace(process.cwd()+ '/', ''),
         type,
         funName,
         testIdArr,
       };
       collectTestIdJson.push(testJson);
-      // console.log("path:", path);
       // console.log("type", type);
       // console.log("funName", funName);
       // console.log("testIdArr", testIdArr);
       // console.log("testJson", testJson);
       // console.log("testJson", testJson);
       // console.log("collectTestIdJson", collectTestIdJson);
-      // // console.log("doclet", doclet);
+      // console.log("doclet", doclet);
 
       // console.log("----------------------------");
     }
   },
   parseComplete: function () {
-    console.log("collectTestIdJson", collectTestIdJson);
+    // 启动差异分析器
+    diffCompiler({
+      projectName: "thsc-front-project-pod",
+      includes: ["src"],
+      collectTestIdJson: collectTestIdJson,
+    });
   },
-  // //
-  // fileComplete: function (e) {
-  //   console.log(e, 'fileComplete?!@?#!@?#@?')
-  // },
 };
-
-// exports.defineTags = function(dictionary) {
-//   dictionary.defineTag('test', {
-//     onTagged: function(doclet, tag) {
-//         // doclet.scope = "instance";
-//         console.log('tag', tag, '!!!!')
-//         console.log('doclet', doclet, '!!!!')
-//     }
-// });
-// };
