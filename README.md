@@ -17,9 +17,14 @@
 	3. 问题：怎么定义删除的元素？
 5. 分析**关系日志**，提取用例状态，结合绑定元素生成**测试报告**（报告包含：变更元素内容，关联用例，用例状态等）
 
-## 使用jsdoc + jsdoc-vuejs  绑定用例代码关系
-1. 依赖安装完成后执行npm run doc
+### 2. 绑定测试用例-代码函数对应关系方案
+### 启动
 
-2. 控制台查看信息--生成json文件待补充
+`npm run doc`
 
-3. 申明方式使用@test 123123,123123
+### 方案
+1. 通过jsdoc-vuejs + jsdoc完成对代码函数解析
+
+2. 在jsdoc-vuejs中通过jsdoc-plugin暴露的方法newDoclet来获取对应目录下的函数-注释对应关系。解析@test 字符串/数据，生成json数据。
+
+3. 通过jsdoc-plugin暴露的方法parseComplete当数据解析完成时，启动差异分析器 diffCompile，将获取的数据传入并解析，在变更文件映射关系-setElement中完成数据组装
