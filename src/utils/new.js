@@ -1,13 +1,21 @@
 /**
  * @test id 123
  */
-function newFunc() {
+function Func() {
   const a = 'a';
   const b = 'b';
 
-  function newChildFunc() {
+  function childFunc() {
     const c = 'c';
   }
 
-  newChildFunc();
+  childFunc();
+}
+
+function curFunc() {
+  const d = 'd';
+}
+
+function newFunc() {
+  
 }

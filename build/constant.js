@@ -5,8 +5,4 @@ module.exports = {
   FILE_MAP_FILE: 'file-map.json',
   // 基本元素关系日志文件名
   ELEMENT_MAP_FILE: 'element-map.json',
-  // 函数节点类型
-  FUNC_TYPE: ['FunctionDeclaration'],
-  // 变量声明节点类型
-  VARIABLE_TYPE: ['VariableDeclaration'],
 }

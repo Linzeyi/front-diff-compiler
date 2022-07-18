@@ -1,7 +1,7 @@
 const parser = require('@babel/parser');
+const generate = require('@babel/generator').default;
 const traverse = require('@babel/traverse').default;
 const vueCompiler = require('vue-template-compiler');
-const { FUNC_TYPE, VARIABLE_TYPE } = require('./constant');
 const fs = require('fs');
 /**
  * @description 解析语法树
@@ -43,24 +43,35 @@ const traverseAST = function(ast) {
  * @param {string} type 文件类型：js｜vue
  */
 const getNodeFromAST = function(ast, type = 'js') {
-  const funcNodes = [];
-  const variableNodes = [];
+  const nodes = [];
   if ('js' === type) {
     traverse(ast, {
-      enter(p) {
-        if (p.node.type.includes(FUNC_TYPE)) {
-          funcNodes.push({
-            name: p.node.id.name,
-            type: 'func',
-          });
-        }
+      ArrowFunctionExpression: function(p) {
+
+        console.log('------------------------')
+        console.log(p)
+      },
+      FunctionExpression: function(p) {
+        // console.log('------------------------')
+        // console.log(p)
+      },
+      FunctionDeclaration: function(p) {
+        nodes.push({
+          name: p.node.id.name,
+          type: 'FunctionDeclaration',
+          code: generate(p.node).code,
+        });
+      },
+      VariableDeclarator: function(p) {
+        nodes.push({
+          name: p.node.id.name,
+          type: 'VariableDeclarator',
+          code: generate(p.node).code,
+        });
       }
     })
   }
-  return {
-    funcNodes,
-    variableNodes
-  }
+  return nodes;
 }
 
 module.exports = {

@@ -38,20 +38,19 @@ const setElementMap = function(fileMap) {
   const elementMap = {};
   for (const pKey in fileMap) {
     const file = fileMap[pKey]
-    for (const funcNode of file.funcNodes) {
-      // console.log(funcNode);
-      const eKey = md5(`${file.p}::${funcNode.name}`);
+    for (const node of file.nodes) {
+      const eKey = md5(`${file.p}::${node.name}`);
       const element = {
         eKey,
         pKey,
-        e: funcNode.name,
+        e: node.name,
         p: file.p,
-        type: funcNode.type,
+        code: node.code,
+        type: node.type,
       }
       elementMap[eKey] = element;
     }
   }
-  console.log(elementMap);
   // 更新变更日志
   fs.writeFileSync('./.diff_output/element-map.json', utils.stringify(elementMap), {});
 }
@@ -68,18 +67,14 @@ const getFileInfo = function(p) {
       const code = fs.readFileSync(p, 'utf-8');
       // 文件存在，则解析内容，转为AST格式
       const ast = parserFileAST(code, type);
-      const {
-        funcNodes,
-        variableNodes
-      } = getNodeFromAST(ast, type);
+      const nodes = getNodeFromAST(ast, type);
       resolve({
         pKey,
         p,
         type,
         ast,
         code,
-        funcNodes,
-        variableNodes,
+        nodes,
         diff: 'change',
       });
     } catch(err) {
@@ -91,8 +86,7 @@ const getFileInfo = function(p) {
         type,
         ast: '',
         code: '',
-        funcNodes: [],
-        variableNodes: [],
+        nodes: [],
         diff: 'remove',
       });
     }
