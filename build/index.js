@@ -64,12 +64,14 @@ const setElementMap = function (fileMap) {
       const eKey = md5(`${file.p}::${funcNode.name}`);
       const currentTestJson = diffOptions.collectTestIdJson[eKey];
       const testIdArr = currentTestJson ? currentTestJson.testIdArr : [];
+      const funDesc = currentTestJson ? currentTestJson.funDesc : '暂无描述';
 
       const element = {
         eKey,
         pKey,
         e: funcNode.name,
         p: file.p,
+        funDesc,
         type: funcNode.type,
         testIdArr: testIdArr,
       };

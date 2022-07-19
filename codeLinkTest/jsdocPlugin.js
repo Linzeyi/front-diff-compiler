@@ -50,10 +50,9 @@ const getTestExampleDesc = function (testId) {
 /**
  * 格式化处理代码中test标记id
  * @param {Array} arr
- * @param {String} funDesc
  * @returns Array<Object>
  */
-const fomartTestIdArr = function (arr, funDesc) {
+const fomartTestIdArr = function (arr) {
   let tmp = [];
   const hash = {};
   arr.forEach((item) => {
@@ -64,7 +63,6 @@ const fomartTestIdArr = function (arr, funDesc) {
     .map((item) => ({
       testId: item,
       testDesc: getTestExampleDesc(item),
-      funDesc: funDesc || "暂无说明",
     }))
     .reduce((cur, next) => {
       hash[next.testId] ? "" : (hash[next.testId] = true && cur.push(next));
@@ -99,7 +97,7 @@ exports.handlers = {
         item.text.split(" ").join("")
       );
       // 获取标准testId数据
-      const testIdArr = fomartTestIdArr(testTagStringToArr, description);
+      const testIdArr = fomartTestIdArr(testTagStringToArr);
       const resolvePath = nodePath
         .resolve(path, filename)
         .replace(process.cwd(), "");
@@ -108,6 +106,7 @@ exports.handlers = {
         type,
         funName,
         testIdArr,
+        funDesc: description,
         testDescEndLineNo: lineno,
       };
       // 收集每一次注释产生数据
