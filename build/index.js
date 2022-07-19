@@ -18,17 +18,39 @@ const diffMapPath = path.resolve(path.join(OUTPUT_PATH,DIFF_MAP_FILE));
 // 配置项
 let diffOptions = {
   // 项目名称（容器）
-  projectName: 'default',
+  projectName: "default",
   // 包含扫描目录
-  includes: ['src']
-}
+  includes: ["src"],
+};
+
+
+
+
 
 /**
  * @description 封装md5加密工具
  * @param {string} str 加密内容
  */
-const md5 = function(str) {
+const md5 = function (str) {
   return md5JS(`${diffOptions.projectName}::${str}`);
+};
+
+
+/**
+ * 用例绑定关系数据处理
+ * @param {Object} collectJson 
+ * @returns 
+ */
+const formatCollectTestJson = function (collectJson){
+  const collectTestIdJson = {};
+  collectJson.forEach(item =>{
+    const {path, funName , testIdArr} = item
+    const diffKey = md5(`${path}::${funName}`)
+    collectTestIdJson[diffKey] = {
+      ...item
+    }
+  })
+  return collectTestIdJson;
 }
 const setDiff = function(diffMap, key, element, status, oldCode = ''){
   diffMap[key] = {
@@ -93,6 +115,9 @@ const setElementMap = async function(fileMap) {
       if(diffType !== 'remove'){
         for (const node of file.nodes) {
           const eKey = md5(`${file.p}::${node.name}`);
+          const currentTestJson = diffOptions.collectTestIdJson[eKey];
+          const testIdArr = currentTestJson ? currentTestJson.testIdArr : [];
+          const funDesc = currentTestJson ? currentTestJson.funDesc : '暂无描述';
           const element = {
             eKey,
             pKey,
@@ -100,6 +125,8 @@ const setElementMap = async function(fileMap) {
             p: file.p,
             code: node.code,
             type: node.type,
+            funDesc,
+            testIdArr: testIdArr,
           }
           elementMap[eKey] = element;
         }
@@ -117,12 +144,12 @@ const setElementMap = async function(fileMap) {
  * @description 获取文件变更信息
  * @param {string} p 文件路径
  */
-const getFileInfo = function(p) {
+const getFileInfo = function (p) {
   return new Promise((resolve) => {
     const pKey = md5(p);
-    const type = p.split('.').pop();
+    const type = p.split(".").pop();
     try {
-      const code = fs.readFileSync(p, 'utf-8');
+      const code = fs.readFileSync(p, "utf-8");
       // 文件存在，则解析内容，转为AST格式
       const ast = parserFileAST(code, type);
       const nodes = getNodeFromAST(ast, type);
@@ -135,9 +162,9 @@ const getFileInfo = function(p) {
         nodes,
         diff: 'change',
       });
-    } catch(err) {
+    } catch (err) {
       // 文件不存在，则视为删除
-      console.log(err)
+      console.log(err);
       resolve({
         pKey,
         p,
@@ -148,8 +175,8 @@ const getFileInfo = function(p) {
         diff: 'remove',
       });
     }
-  })
-}
+  });
+};
 
 /**
  * @description 设置文件变更关系
@@ -159,48 +186,52 @@ const setFileMap = async function(diffFilePaths) {
   // 文件变更关系集合
   let fileMap = {};
   for (const p of diffFilePaths) {
-    const fileInfo =  await getFileInfo(p);
+    const fileInfo = await getFileInfo(p);
     fileMap[fileInfo.pKey] = fileInfo;
   }
   try {
     fs.accessSync(OUTPUT_PATH);
-  } catch(err) {
-    console.log('> mkdir ', OUTPUT_PATH);
+  } catch (err) {
+    console.log("> mkdir ", OUTPUT_PATH);
     // 没有输出目录则新建一个
     fs.mkdirSync(OUTPUT_PATH);
   } finally {
     try {
-      lastFileMap = fs.readFileSync(fileMapPath, 'utf-8');
-    } catch(err) {
+      lastFileMap = fs.readFileSync(fileMapPath, "utf-8");
+    } catch (err) {
       // 不存在上一次变更记录
       lastFileMap = null;
     } finally {
-      console.log('> output ', fileMapPath);
+      console.log("> output ", fileMapPath);
       // 更新变更日志
       fs.writeFileSync(fileMapPath, utils.stringify(fileMap), {});
       setElementMap(fileMap);
     }
   }
-}
+};
 
 /**
  * @description 分析git提交记录，获取差异文件
  */
-const getDiffFiles = function() {
+const getDiffFiles = function () {
   try {
     // 根据扫描范围，获取差异文件路径集合
-    const diffFilePaths = execSync('git diff --name-only master').toString().split('\n').filter(v => !!v && v.includes(diffOptions.includes));
-    console.log('> diff files ', diffFilePaths)
+    const diffFilePaths = execSync("git diff --name-only master")
+      .toString()
+      .split("\n")
+      .filter((v) => !!v && v.includes(diffOptions.includes));
+    console.log("> diff files ", diffFilePaths);
     setFileMap(diffFilePaths);
-  } catch(err) {
-    console.log('error: ', err);
+  } catch (err) {
+    console.log("error: ", err);
   }
-}
+};
 
-module.exports = function(options) {
+module.exports = function (options) {
   if (options) {
     diffOptions.projectName = options.projectName || diffOptions.projectName;
     diffOptions.includes = options.includes || diffOptions.includes;
+    diffOptions.collectTestIdJson = formatCollectTestJson(options.collectTestIdJson);
   }
   getDiffFiles();
-}
+};

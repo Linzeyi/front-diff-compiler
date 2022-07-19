@@ -1,5 +1,5 @@
 /**
- * @test id 123
+ * @test 100123
  */
 function Func() {
   const a = 'a';
