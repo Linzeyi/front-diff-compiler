@@ -48,8 +48,8 @@ const getNodeFromAST = function(ast, type = 'js') {
     traverse(ast, {
       ArrowFunctionExpression: function(p) {
 
-        console.log('------------------------')
-        console.log(p)
+        // console.log('------------------------')
+        // console.log(p)
       },
       FunctionExpression: function(p) {
         // console.log('------------------------')

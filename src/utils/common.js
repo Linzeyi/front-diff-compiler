@@ -38,15 +38,13 @@ function func2() {
   const name = 'func3';
 }
 
-function func3() {
-  // do something
-  const name = 'func3';
-}
-
 export const uuu = function() {
   return 'ua';
 }
 
 testArrowFunc = () => {
   let bbb = '';
+  let testArrowChildFunc = () => {
+    const name = 'arrow';
+  }
 }

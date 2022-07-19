@@ -11,11 +11,3 @@ function Func() {
 
   childFunc();
 }
-
-function curFunc() {
-  const d = 'd';
-}
-
-function newFunc() {
-  
-}

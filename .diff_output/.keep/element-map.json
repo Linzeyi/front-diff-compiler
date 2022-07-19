@@ -60,7 +60,7 @@
     "pKey": "104123185a8186088d4e243227747772",
     "e": "name",
     "p": "src/utils/common.js",
-    "code": "name = 'arrow'",
+    "code": "name = 'func3'",
     "type": "VariableDeclarator"
   },
   "b2c6b9cc7c600d9dc8c4b6a1a389e56f": {
@@ -69,6 +69,14 @@
     "e": "func2",
     "p": "src/utils/common.js",
     "code": "function func2() {\n  // do something\n  const name = 'func3';\n}",
+    "type": "FunctionDeclaration"
+  },
+  "861a6941737751d05d9ca1e33113b3c5": {
+    "eKey": "861a6941737751d05d9ca1e33113b3c5",
+    "pKey": "104123185a8186088d4e243227747772",
+    "e": "func3",
+    "p": "src/utils/common.js",
+    "code": "function func3() {\n  // do something\n  const name = 'func3';\n}",
     "type": "FunctionDeclaration"
   },
   "7d71b691e150cd7729c62eeaf43d1af7": {
@@ -85,14 +93,6 @@
     "e": "bbb",
     "p": "src/utils/common.js",
     "code": "bbb = ''",
-    "type": "VariableDeclarator"
-  },
-  "0cd28caa7556d165965c854947f028ec": {
-    "eKey": "0cd28caa7556d165965c854947f028ec",
-    "pKey": "104123185a8186088d4e243227747772",
-    "e": "testArrowChildFunc",
-    "p": "src/utils/common.js",
-    "code": "testArrowChildFunc = () => {\n  const name = 'arrow';\n}",
     "type": "VariableDeclarator"
   },
   "f7cc272f7d1b88fced52a775da67db17": {
@@ -198,5 +198,29 @@
     "p": "src/utils/new.js",
     "code": "c = 'c'",
     "type": "VariableDeclarator"
+  },
+  "a9457b9134bbb4c7fd28a796716c864b": {
+    "eKey": "a9457b9134bbb4c7fd28a796716c864b",
+    "pKey": "b167ed7bf1633e0fa6af398ce89714b7",
+    "e": "curFunc",
+    "p": "src/utils/new.js",
+    "code": "function curFunc() {\n  const d = 'd';\n}",
+    "type": "FunctionDeclaration"
+  },
+  "abf8d804a464afa6c9a78bbe98256212": {
+    "eKey": "abf8d804a464afa6c9a78bbe98256212",
+    "pKey": "b167ed7bf1633e0fa6af398ce89714b7",
+    "e": "d",
+    "p": "src/utils/new.js",
+    "code": "d = 'd'",
+    "type": "VariableDeclarator"
+  },
+  "4565d9649ed68facad5f5c4bf7304ee8": {
+    "eKey": "4565d9649ed68facad5f5c4bf7304ee8",
+    "pKey": "b167ed7bf1633e0fa6af398ce89714b7",
+    "e": "newFunc",
+    "p": "src/utils/new.js",
+    "code": "function newFunc() {}",
+    "type": "FunctionDeclaration"
   }
 }

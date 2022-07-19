@@ -5,7 +5,16 @@ const md5JS = require('md5-js');
 const jsondiffpatch = require('jsondiffpatch');
 const utils = require('./utils');
 const { parserFileAST, traverseAST, getNodeFromAST } = require('./parser');
-const { OUTPUT_PATH, FILE_MAP_FILE, ELEMENT_MAP_FILE } = require('./constant');
+const { OUTPUT_PATH, KEEP_PATH, FILE_MAP_FILE, ELEMENT_MAP_FILE, DIFF_MAP_FILE } = require('./constant');
+// 文件关系日志文件名
+const fileMapPath = path.resolve(path.join(OUTPUT_PATH, FILE_MAP_FILE));
+// 基本元素关系日志路径
+const elementMapPath = path.resolve(path.join(OUTPUT_PATH, ELEMENT_MAP_FILE));
+// 基本元素关系日志存储路径
+const elementMapKeepPath = path.resolve(path.join(OUTPUT_PATH, KEEP_PATH, ELEMENT_MAP_FILE));
+// 差异报告
+const diffMapPath = path.resolve(path.join(OUTPUT_PATH), DIFF_MAP_FILE);
+
 // 配置项
 let diffOptions = {
   // 项目名称（容器）
@@ -23,36 +32,58 @@ const md5 = function(str) {
 }
 
 /**
- * @test id
  * @description 对比历史记录，生成差异分析报告  
+ * @param {Object} elementMap 元素关系映射表
  */
-const generateDiffReport = function(fileMap, lastFileMap) {
-  // console.log(jsondiffpatch.diff(fileMap, lastFileMap));
+const setDiffReport = async function(elementMap) {
+  try {
+    let diffMap = {};
+    // 上一次的变更记录
+    let elementKeepMap = await fs.readFileSync(elementMapKeepPath, 'utf-8');
+    for(const eKey in elementMap) {
+      const element = elementMap[eKey];
+      const keepElement = elementKeepMap[eKey];
+      if (keepElement) {
+        // 该元素存在上一次的扫描结果，进行差异分析
+        console.log('存在：', keepElement, '对比当前：', element)
+      } else {
+        // 该元素为新增元素
+        console.log('新增：', element);
+      }
+    }
+  } catch(e) {
+
+  }
 }
 
 /**
- * @description 提炼关键元素，生成元素变更关系日志
+ * @description 提炼关键元素，生成基本的元素映射关系日志
  * @param {Object} fileMap 变更文件映射关系
  */
-const setElementMap = function(fileMap) {
-  const elementMap = {};
-  for (const pKey in fileMap) {
-    const file = fileMap[pKey]
-    for (const node of file.nodes) {
-      const eKey = md5(`${file.p}::${node.name}`);
-      const element = {
-        eKey,
-        pKey,
-        e: node.name,
-        p: file.p,
-        code: node.code,
-        type: node.type,
+const setElementMap = async function(fileMap) {
+  try {
+    const elementMap = {};
+    for (const pKey in fileMap) {
+      const file = fileMap[pKey]
+      for (const node of file.nodes) {
+        const eKey = md5(`${file.p}::${node.name}`);
+        const element = {
+          eKey,
+          pKey,
+          e: node.name,
+          p: file.p,
+          code: node.code,
+          type: node.type,
+        }
+        elementMap[eKey] = element;
       }
-      elementMap[eKey] = element;
     }
+    // 更新变更日志
+    await fs.writeFileSync(elementMapPath, utils.stringify(elementMap), {});
+    setDiffReport(elementMap);
+  } catch(e) {
+    console.log(err);
   }
-  // 更新变更日志
-  fs.writeFileSync('./.diff_output/element-map.json', utils.stringify(elementMap), {});
 }
 
 /**
@@ -98,15 +129,12 @@ const getFileInfo = function(p) {
  * @param {Array<string>} diffFilePaths 变更的文件路径集合
  */
 const setFileMap = async function(diffFilePaths) {
-  // 上一次文件变更记录
-  let lastFileMap = null;
   // 文件变更关系集合
   let fileMap = {};
   for (const p of diffFilePaths) {
     const fileInfo =  await getFileInfo(p);
     fileMap[fileInfo.pKey] = fileInfo;
   }
-  const fileMapPath = path.resolve(path.join(OUTPUT_PATH, FILE_MAP_FILE));
   try {
     fs.accessSync(OUTPUT_PATH);
   } catch(err) {
