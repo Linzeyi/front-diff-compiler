@@ -3,6 +3,10 @@ export const getPlatform = () => {
   return platform;
 }
 
+export const getUserid1 = () => {
+  return '123123';
+}
+
 export const getUserid = () => {
   return '123123';
 }
