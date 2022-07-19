@@ -3,14 +3,6 @@
 </template>
 
 <script>
-  /**
-   * @vue-prop {Number} initialCounter - Initial counter's value
-   * @vue-prop {Number} [step=1] - Step
-   * @vue-data {Number} counter - Current counter's value
-   * @vue-computed {String} message
-   * @vue-event {Number} increment - Emit counter's value after increment
-   * @vue-event {Number} decrement - Emit counter's value after decrement
-   */
   export default {
     props: {
       initialCounter: {
@@ -33,13 +25,17 @@
       }
     },
     methods: {
-      /**
-       * @test xxxxxxxxxxxxxxxxxxxxx
+      /** 相加
+       * @test 100122
        */
       increment() {
         this.counter += 1;
         this.$emit('increment', this.counter);
       },
+
+      /** 相加
+       * @test 100121
+       */
       decrement() {
         this.counter -= 1;
         this.$emit('decrement', this.counter);

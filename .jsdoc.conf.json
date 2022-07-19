@@ -14,7 +14,7 @@
     "excludePattern": "(^|\\/|\\\\)_"
   },
   "plugins": [
-    "./jsdoc-vue"
+    "./codeLinkTest/jsdocPlugin"
   ],
   "templates": {
     "cleverLinks": false,

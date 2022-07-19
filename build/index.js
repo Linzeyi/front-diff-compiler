@@ -23,14 +23,15 @@ let diffOptions = {
  * @param {string} str 加密内容
  */
 const md5 = function (str) {
-  console.log(md5JS(`${diffOptions.projectName}::${str}`), "??");
   return md5JS(`${diffOptions.projectName}::${str}`);
 };
 
 
 /**
  * 用例绑定关系数据处理
-*/
+ * @param {Object} collectJson 
+ * @returns 
+ */
 const formatCollectTestJson = function (collectJson){
   const collectTestIdJson = {};
   collectJson.forEach(item =>{
@@ -56,7 +57,6 @@ const generateDiffReport = function (fileMap, lastFileMap) {
  */
 const setElementMap = function (fileMap) {
   const elementMap = {};
-  console.log("> fileMap ", fileMap);
   for (const pKey in fileMap) {
     const file = fileMap[pKey];
     for (const funcNode of file.funcNodes) {
