@@ -52,7 +52,15 @@ const formatCollectTestJson = function (collectJson){
   })
   return collectTestIdJson;
 }
-const setDiff = function(diffMap, key, element, status, oldCode = ''){
+/**
+ * 设置diffmap的值
+ * @param {object} diffMap 
+ * @param {string} key 
+ * @param {object} element 
+ * @param {'add'|'remove'|'change'} status 
+ * @param {string} oldCode 
+ */
+const setDiffMap = function(diffMap, key, element, status, oldCode = ''){
   diffMap[key] = {
     eKey:key,
     code: status === 'remove'? '' : element.code,
@@ -61,7 +69,9 @@ const setDiff = function(diffMap, key, element, status, oldCode = ''){
     p: element.p,
     e: element.e,
     type: element.type,
-    pKey:element.pKey
+    pKey:element.pKey,
+    funDesc: element.funDesc,
+    testIdArr:element.testIdArr,
   } 
 }
 /**
@@ -81,19 +91,19 @@ const setDiffReport = async function(elementMap) {
       if (keepElement) {
         // 该元素存在上一次的扫描结果，进行差异分析，更新
         if(element.code !== keepElement.code){
-          setDiff(diffMap,eKey, element, 'change', keepElement.code)
+          setDiffMap(diffMap,eKey, element, 'change', keepElement.code)
         }
-        //删除非所有存在的，剩下的就是删除的
+        //删除所有存在的，剩下的就是删除的
         delete oldElementMap[eKey]
       } else {
         // 该元素为新增元素
-        setDiff(diffMap, eKey, element, 'add')
+        setDiffMap(diffMap, eKey, element, 'add')
       }
     }
     //oldElementMap剩下的都是被删除的
     for(const eKey in oldElementMap){
       const removeElement = oldElementMap[eKey]
-      setDiff(diffMap, eKey, removeElement, 'remove', removeElement.code)
+      setDiffMap(diffMap, eKey, removeElement, 'remove', removeElement.code)
     }
     await fs.writeFileSync(diffMapPath, utils.stringify(diffMap), {});
   } catch(e) {

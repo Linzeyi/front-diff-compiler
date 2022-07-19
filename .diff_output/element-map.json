@@ -1,19 +1,23 @@
 {
+  "b9b9fe7f7599378b7565ad600cbdad10": {
+    "eKey": "b9b9fe7f7599378b7565ad600cbdad10",
+    "pKey": "104123185a8186088d4e243227747772",
+    "e": "fxh",
+    "p": "src/utils/common.js",
+    "code": "fxh = 123",
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
   "49943683fe1159cb04621e83321c8f05": {
     "eKey": "49943683fe1159cb04621e83321c8f05",
     "pKey": "104123185a8186088d4e243227747772",
     "e": "getPlatform",
     "p": "src/utils/common.js",
-    "code": "getPlatform = () => {\n  let prefix = 'platform::';\n  const platform = isAndroid ? 'gphone' : 'iphone';\n  return `${prefix}${platform}`;\n}",
-    "type": "VariableDeclarator"
-  },
-  "86a6841631bb73903a7da8c357c6acce": {
-    "eKey": "86a6841631bb73903a7da8c357c6acce",
-    "pKey": "104123185a8186088d4e243227747772",
-    "e": "prefix",
-    "p": "src/utils/common.js",
-    "code": "prefix = 'platform::'",
-    "type": "VariableDeclarator"
+    "code": "getPlatform = () => {\n  const platform = isAndroid ? 'gphone' : 'iphone';\n  return `${prefix}${platform}`;\n}",
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "0a7b9bc8e65a16c0ec649e90af436fab": {
     "eKey": "0a7b9bc8e65a16c0ec649e90af436fab",
@@ -21,15 +25,19 @@
     "e": "platform",
     "p": "src/utils/common.js",
     "code": "platform = isAndroid ? 'gphone' : 'iphone'",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
-  "98fceda7a5a4180b9fd1a2ae8520034b": {
-    "eKey": "98fceda7a5a4180b9fd1a2ae8520034b",
+  "9335fcddba7b4600fcdbcf09621732be": {
+    "eKey": "9335fcddba7b4600fcdbcf09621732be",
     "pKey": "104123185a8186088d4e243227747772",
-    "e": "getUserid",
+    "e": "getUseridV1",
     "p": "src/utils/common.js",
-    "code": "getUserid = () => {\n  return '123123';\n}",
-    "type": "VariableDeclarator"
+    "code": "getUseridV1 = () => {\n  return '123123';\n}",
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "310aee68eb80eb8577ed354c02e10936": {
     "eKey": "310aee68eb80eb8577ed354c02e10936",
@@ -37,15 +45,9 @@
     "e": "a",
     "p": "src/utils/common.js",
     "code": "a = () => {\n  return '111';\n}",
-    "type": "VariableDeclarator"
-  },
-  "8ec85d80399ee6e167eb7b21df89ac05": {
-    "eKey": "8ec85d80399ee6e167eb7b21df89ac05",
-    "pKey": "104123185a8186088d4e243227747772",
-    "e": "getUA",
-    "p": "src/utils/common.js",
-    "code": "getUA = function () {\n  return 'ua';\n}",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "ad6f3205eb5bc5cddc72ee0aa7bfcbd4": {
     "eKey": "ad6f3205eb5bc5cddc72ee0aa7bfcbd4",
@@ -53,15 +55,59 @@
     "e": "obj",
     "p": "src/utils/common.js",
     "code": "obj = {\n  name: '对象'\n}",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "d3777477d8595362caae7821538dc709": {
+    "eKey": "d3777477d8595362caae7821538dc709",
+    "pKey": "104123185a8186088d4e243227747772",
+    "e": "Book",
+    "p": "src/utils/common.js",
+    "code": "Book = function (title, author) {\n  this.title = title;\n  this.author = author;\n}",
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "98fceda7a5a4180b9fd1a2ae8520034b": {
+    "eKey": "98fceda7a5a4180b9fd1a2ae8520034b",
+    "pKey": "104123185a8186088d4e243227747772",
+    "e": "getUserid",
+    "p": "src/utils/common.js",
+    "code": "getUserid = (platform, version) => {\n  return platform + version;\n}",
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "50e823ea7723f20ad7dab684f7c0d2ba": {
+    "eKey": "50e823ea7723f20ad7dab684f7c0d2ba",
+    "pKey": "104123185a8186088d4e243227747772",
+    "e": "getName",
+    "p": "src/utils/common.js",
+    "code": "getName = (age, sex) => {\n  return '小明';\n}",
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "8ec85d80399ee6e167eb7b21df89ac05": {
+    "eKey": "8ec85d80399ee6e167eb7b21df89ac05",
+    "pKey": "104123185a8186088d4e243227747772",
+    "e": "getUA",
+    "p": "src/utils/common.js",
+    "code": "getUA = function () {\n  return \"ua\";\n}",
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "5ec32f7274260f73121fe35a836ce657": {
     "eKey": "5ec32f7274260f73121fe35a836ce657",
     "pKey": "104123185a8186088d4e243227747772",
     "e": "func1",
     "p": "src/utils/common.js",
-    "code": "/**\r\n * \r\n */\nfunction func1() {\n  // do something\n\n  /**\r\n   * \r\n   */\n  const name = 'func1';\n}",
-    "type": "FunctionDeclaration"
+    "code": "/**\r\n * 测试方法一\r\n * @test 10011\r\n */\nfunction func1() {\n  // do something\n  const name = \"func1\";\n}\n/**\r\n * 测试方法二\r\n * @test 10012,100114\r\n * @test 100112,100111\r\n */",
+    "type": "FunctionDeclaration",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "5a18838a9ebb8c429ed790c4c90afb8e": {
     "eKey": "5a18838a9ebb8c429ed790c4c90afb8e",
@@ -69,15 +115,29 @@
     "e": "name",
     "p": "src/utils/common.js",
     "code": "name = 'arrow'",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "b2c6b9cc7c600d9dc8c4b6a1a389e56f": {
     "eKey": "b2c6b9cc7c600d9dc8c4b6a1a389e56f",
     "pKey": "104123185a8186088d4e243227747772",
     "e": "func2",
     "p": "src/utils/common.js",
-    "code": "function func2() {\n  // do something\n  const name = 'func3';\n}",
-    "type": "FunctionDeclaration"
+    "code": "/**\r\n * 测试方法二\r\n * @test 10012,100114\r\n * @test 100112,100111\r\n */\nfunction func2() {\n  // do something\n  const name = \"func3\";\n}\n/**\r\n * 测试方法三\r\n * @test 10013\r\n */",
+    "type": "FunctionDeclaration",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "861a6941737751d05d9ca1e33113b3c5": {
+    "eKey": "861a6941737751d05d9ca1e33113b3c5",
+    "pKey": "104123185a8186088d4e243227747772",
+    "e": "func3",
+    "p": "src/utils/common.js",
+    "code": "/**\r\n * 测试方法三\r\n * @test 10013\r\n */\nfunction func3() {\n  // do something\n  const name = \"func3\";\n}",
+    "type": "FunctionDeclaration",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "7d71b691e150cd7729c62eeaf43d1af7": {
     "eKey": "7d71b691e150cd7729c62eeaf43d1af7",
@@ -85,7 +145,9 @@
     "e": "uuu",
     "p": "src/utils/common.js",
     "code": "uuu = function () {\n  return 'ua';\n}",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "5f77d820e21c38c37d244c1a03bdf60f": {
     "eKey": "5f77d820e21c38c37d244c1a03bdf60f",
@@ -93,7 +155,9 @@
     "e": "bbb",
     "p": "src/utils/common.js",
     "code": "bbb = ''",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "0cd28caa7556d165965c854947f028ec": {
     "eKey": "0cd28caa7556d165965c854947f028ec",
@@ -101,7 +165,9 @@
     "e": "testArrowChildFunc",
     "p": "src/utils/common.js",
     "code": "testArrowChildFunc = () => {\n  const name = 'arrow';\n}",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "f7cc272f7d1b88fced52a775da67db17": {
     "eKey": "f7cc272f7d1b88fced52a775da67db17",
@@ -109,7 +175,9 @@
     "e": "a",
     "p": "src/utils/func.js",
     "code": "function a(x) {\n  const testVarianle1 = '1',\n        testVarianle2 = '2';\n  const testVarianle3 = '3';\n} // 注意：第二条和第三条在AST中意义不同",
-    "type": "FunctionDeclaration"
+    "type": "FunctionDeclaration",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "a6059d051f0b2a9ecb5c826e2efe3e7b": {
     "eKey": "a6059d051f0b2a9ecb5c826e2efe3e7b",
@@ -117,7 +185,9 @@
     "e": "testVarianle1",
     "p": "src/utils/func.js",
     "code": "testVarianle1 = '1'",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "55270b3c50b4945f1d2c77859ac39737": {
     "eKey": "55270b3c50b4945f1d2c77859ac39737",
@@ -125,7 +195,9 @@
     "e": "testVarianle2",
     "p": "src/utils/func.js",
     "code": "testVarianle2 = '2'",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "310caba86d387008dd75771099891e7f": {
     "eKey": "310caba86d387008dd75771099891e7f",
@@ -133,7 +205,9 @@
     "e": "testVarianle3",
     "p": "src/utils/func.js",
     "code": "testVarianle3 = '3'",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "2c4209341295d413e0847ad010516a6f": {
     "eKey": "2c4209341295d413e0847ad010516a6f",
@@ -141,7 +215,9 @@
     "e": "b",
     "p": "src/utils/func.js",
     "code": "b = function (x = 1) {}",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "fa6413bff499efd2f3cffe74cdf555d4": {
     "eKey": "fa6413bff499efd2f3cffe74cdf555d4",
@@ -149,7 +225,9 @@
     "e": "c",
     "p": "src/utils/func.js",
     "code": "c = ([x] = [1]) => {}",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "327d64968916a9622ab526a9bb9fb3c9": {
     "eKey": "327d64968916a9622ab526a9bb9fb3c9",
@@ -157,7 +235,9 @@
     "e": "d",
     "p": "src/utils/func.js",
     "code": "async function d(x) {}",
-    "type": "FunctionDeclaration"
+    "type": "FunctionDeclaration",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "eeb0c078b7dc01dc46f21a6b0ee19305": {
     "eKey": "eeb0c078b7dc01dc46f21a6b0ee19305",
@@ -165,15 +245,19 @@
     "e": "e",
     "p": "src/utils/func.js",
     "code": "function* e(x) {}",
-    "type": "FunctionDeclaration"
+    "type": "FunctionDeclaration",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "f4c4d34c38ce14b9b4fe8a5edf904f39": {
     "eKey": "f4c4d34c38ce14b9b4fe8a5edf904f39",
     "pKey": "b167ed7bf1633e0fa6af398ce89714b7",
     "e": "Func",
     "p": "src/utils/new.js",
-    "code": "/**\r\n * @test id 123\r\n */\nfunction Func() {\n  const a = 'a';\n  const b = 'b';\n\n  function childFunc() {\n    const c = 'c';\n  }\n\n  childFunc();\n}",
-    "type": "FunctionDeclaration"
+    "code": "/**\r\n * @test 100123\r\n */\nfunction Func() {\n  const a = 'a';\n  const b = 'b';\n\n  function childFunc() {\n    const c = 'c';\n  }\n\n  childFunc();\n}",
+    "type": "FunctionDeclaration",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "13a61b73b3035773e9805140596e1d97": {
     "eKey": "13a61b73b3035773e9805140596e1d97",
@@ -181,7 +265,9 @@
     "e": "a",
     "p": "src/utils/new.js",
     "code": "a = 'a'",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "012233b4302d74063110661db24155f3": {
     "eKey": "012233b4302d74063110661db24155f3",
@@ -189,7 +275,9 @@
     "e": "b",
     "p": "src/utils/new.js",
     "code": "b = 'b'",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "74b6391446e0b1e79ba831ea6f664e05": {
     "eKey": "74b6391446e0b1e79ba831ea6f664e05",
@@ -197,7 +285,9 @@
     "e": "childFunc",
     "p": "src/utils/new.js",
     "code": "function childFunc() {\n  const c = 'c';\n}",
-    "type": "FunctionDeclaration"
+    "type": "FunctionDeclaration",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   },
   "64c3cdbdcf2bcbc104acc77f60bf626d": {
     "eKey": "64c3cdbdcf2bcbc104acc77f60bf626d",
@@ -205,6 +295,18 @@
     "e": "c",
     "p": "src/utils/new.js",
     "code": "c = 'c'",
-    "type": "VariableDeclarator"
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "0dda68773d0f9a3a938d2abf6043c14f": {
+    "eKey": "0dda68773d0f9a3a938d2abf6043c14f",
+    "pKey": "095bfed62723cb06d1b5ecb92e7716d6",
+    "e": "testa",
+    "p": "src/utils/test.js",
+    "code": "testa = 123",
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
   }
 }
