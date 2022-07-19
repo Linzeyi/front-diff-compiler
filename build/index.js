@@ -231,7 +231,7 @@ module.exports = function (options) {
   if (options) {
     diffOptions.projectName = options.projectName || diffOptions.projectName;
     diffOptions.includes = options.includes || diffOptions.includes;
-    diffOptions.collectTestIdJson = formatCollectTestJson(options.collectTestIdJson);
+    diffOptions.collectTestIdJson = formatCollectTestJson(options.collectTestIdJson || []);
   }
   getDiffFiles();
 };
