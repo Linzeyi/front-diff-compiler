@@ -1,0 +1,92 @@
+{
+  "310aee68eb80eb8577ed354c02e10936": {
+    "eKey": "310aee68eb80eb8577ed354c02e10936",
+    "code": "a = () => {\n  return '111';\n}",
+    "oldCode": "",
+    "status": "add",
+    "p": "src/utils/common.js",
+    "e": "a",
+    "type": "VariableDeclarator",
+    "pKey": "104123185a8186088d4e243227747772"
+  },
+  "5ec32f7274260f73121fe35a836ce657": {
+    "eKey": "5ec32f7274260f73121fe35a836ce657",
+    "code": "/**\r\n * \r\n */\nfunction func1() {\n  // do something\n\n  /**\r\n   * \r\n   */\n  const name = 'func1';\n}",
+    "oldCode": "/**\n * \n */\nfunction func1() {\n  // do something\n\n  /**\n   * \n   */\n  const name = 'func1';\n}",
+    "status": "change",
+    "p": "src/utils/common.js",
+    "e": "func1",
+    "type": "FunctionDeclaration",
+    "pKey": "104123185a8186088d4e243227747772"
+  },
+  "5a18838a9ebb8c429ed790c4c90afb8e": {
+    "eKey": "5a18838a9ebb8c429ed790c4c90afb8e",
+    "code": "name = 'arrow'",
+    "oldCode": "name = 'func3'",
+    "status": "change",
+    "p": "src/utils/common.js",
+    "e": "name",
+    "type": "VariableDeclarator",
+    "pKey": "104123185a8186088d4e243227747772"
+  },
+  "0cd28caa7556d165965c854947f028ec": {
+    "eKey": "0cd28caa7556d165965c854947f028ec",
+    "code": "testArrowChildFunc = () => {\n  const name = 'arrow';\n}",
+    "oldCode": "",
+    "status": "add",
+    "p": "src/utils/common.js",
+    "e": "testArrowChildFunc",
+    "type": "VariableDeclarator",
+    "pKey": "104123185a8186088d4e243227747772"
+  },
+  "f4c4d34c38ce14b9b4fe8a5edf904f39": {
+    "eKey": "f4c4d34c38ce14b9b4fe8a5edf904f39",
+    "code": "/**\r\n * @test id 123\r\n */\nfunction Func() {\n  const a = 'a';\n  const b = 'b';\n\n  function childFunc() {\n    const c = 'c';\n  }\n\n  childFunc();\n}",
+    "oldCode": "/**\n * @test id 123\n */\nfunction Func() {\n  const a = 'a';\n  const b = 'b';\n\n  function childFunc() {\n    const c = 'c';\n  }\n\n  childFunc();\n}",
+    "status": "change",
+    "p": "src/utils/new.js",
+    "e": "Func",
+    "type": "FunctionDeclaration",
+    "pKey": "b167ed7bf1633e0fa6af398ce89714b7"
+  },
+  "861a6941737751d05d9ca1e33113b3c5": {
+    "eKey": "861a6941737751d05d9ca1e33113b3c5",
+    "code": "",
+    "oldCode": "function func3() {\n  // do something\n  const name = 'func3';\n}",
+    "status": "remove",
+    "p": "src/utils/common.js",
+    "e": "func3",
+    "type": "FunctionDeclaration",
+    "pKey": "104123185a8186088d4e243227747772"
+  },
+  "a9457b9134bbb4c7fd28a796716c864b": {
+    "eKey": "a9457b9134bbb4c7fd28a796716c864b",
+    "code": "",
+    "oldCode": "function curFunc() {\n  const d = 'd';\n}",
+    "status": "remove",
+    "p": "src/utils/new.js",
+    "e": "curFunc",
+    "type": "FunctionDeclaration",
+    "pKey": "b167ed7bf1633e0fa6af398ce89714b7"
+  },
+  "abf8d804a464afa6c9a78bbe98256212": {
+    "eKey": "abf8d804a464afa6c9a78bbe98256212",
+    "code": "",
+    "oldCode": "d = 'd'",
+    "status": "remove",
+    "p": "src/utils/new.js",
+    "e": "d",
+    "type": "VariableDeclarator",
+    "pKey": "b167ed7bf1633e0fa6af398ce89714b7"
+  },
+  "4565d9649ed68facad5f5c4bf7304ee8": {
+    "eKey": "4565d9649ed68facad5f5c4bf7304ee8",
+    "code": "",
+    "oldCode": "function newFunc() {}",
+    "status": "remove",
+    "p": "src/utils/new.js",
+    "e": "newFunc",
+    "type": "FunctionDeclaration",
+    "pKey": "b167ed7bf1633e0fa6af398ce89714b7"
+  }
+}

@@ -31,6 +31,14 @@
     "code": "getUserid = () => {\n  return '123123';\n}",
     "type": "VariableDeclarator"
   },
+  "310aee68eb80eb8577ed354c02e10936": {
+    "eKey": "310aee68eb80eb8577ed354c02e10936",
+    "pKey": "104123185a8186088d4e243227747772",
+    "e": "a",
+    "p": "src/utils/common.js",
+    "code": "a = () => {\n  return '111';\n}",
+    "type": "VariableDeclarator"
+  },
   "8ec85d80399ee6e167eb7b21df89ac05": {
     "eKey": "8ec85d80399ee6e167eb7b21df89ac05",
     "pKey": "104123185a8186088d4e243227747772",
@@ -52,7 +60,7 @@
     "pKey": "104123185a8186088d4e243227747772",
     "e": "func1",
     "p": "src/utils/common.js",
-    "code": "/**\n * \n */\nfunction func1() {\n  // do something\n\n  /**\n   * \n   */\n  const name = 'func1';\n}",
+    "code": "/**\r\n * \r\n */\nfunction func1() {\n  // do something\n\n  /**\r\n   * \r\n   */\n  const name = 'func1';\n}",
     "type": "FunctionDeclaration"
   },
   "5a18838a9ebb8c429ed790c4c90afb8e": {
@@ -164,7 +172,7 @@
     "pKey": "b167ed7bf1633e0fa6af398ce89714b7",
     "e": "Func",
     "p": "src/utils/new.js",
-    "code": "/**\n * @test id 123\n */\nfunction Func() {\n  const a = 'a';\n  const b = 'b';\n\n  function childFunc() {\n    const c = 'c';\n  }\n\n  childFunc();\n}",
+    "code": "/**\r\n * @test id 123\r\n */\nfunction Func() {\n  const a = 'a';\n  const b = 'b';\n\n  function childFunc() {\n    const c = 'c';\n  }\n\n  childFunc();\n}",
     "type": "FunctionDeclaration"
   },
   "13a61b73b3035773e9805140596e1d97": {

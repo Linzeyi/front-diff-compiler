@@ -7,7 +7,9 @@ export const getPlatform = () => {
 export const getUserid = () => {
   return '123123';
 }
-
+const a = () => {
+  return '111'
+}
 /**
  * @test id 2002|24|524 
  * @returns 

@@ -13,7 +13,7 @@ const elementMapPath = path.resolve(path.join(OUTPUT_PATH, ELEMENT_MAP_FILE));
 // 基本元素关系日志存储路径
 const elementMapKeepPath = path.resolve(path.join(OUTPUT_PATH, KEEP_PATH, ELEMENT_MAP_FILE));
 // 差异报告
-const diffMapPath = path.resolve(path.join(OUTPUT_PATH), DIFF_MAP_FILE);
+const diffMapPath = path.resolve(path.join(OUTPUT_PATH,DIFF_MAP_FILE));
 
 // 配置项
 let diffOptions = {
@@ -30,7 +30,18 @@ let diffOptions = {
 const md5 = function(str) {
   return md5JS(`${diffOptions.projectName}::${str}`);
 }
-
+const setDiff = function(diffMap, key, element, status, oldCode = ''){
+  diffMap[key] = {
+    eKey:key,
+    code: status === 'remove'? '' : element.code,
+    oldCode:  oldCode,
+    status: status,
+    p: element.p,
+    e: element.e,
+    type: element.type,
+    pKey:element.pKey
+  } 
+}
 /**
  * @description 对比历史记录，生成差异分析报告  
  * @param {Object} elementMap 元素关系映射表
@@ -39,18 +50,30 @@ const setDiffReport = async function(elementMap) {
   try {
     let diffMap = {};
     // 上一次的变更记录
-    let elementKeepMap = await fs.readFileSync(elementMapKeepPath, 'utf-8');
+    const oldElementString = await fs.readFileSync(elementMapKeepPath, 'utf-8')
+    let elementKeepMap = JSON.parse(oldElementString);
+    const oldElementMap = JSON.parse(oldElementString);
     for(const eKey in elementMap) {
       const element = elementMap[eKey];
       const keepElement = elementKeepMap[eKey];
       if (keepElement) {
-        // 该元素存在上一次的扫描结果，进行差异分析
-        console.log('存在：', keepElement, '对比当前：', element)
+        // 该元素存在上一次的扫描结果，进行差异分析，更新
+        if(element.code !== keepElement.code){
+          setDiff(diffMap,eKey, element, 'change', keepElement.code)
+        }
+        //删除非所有存在的，剩下的就是删除的
+        delete oldElementMap[eKey]
       } else {
         // 该元素为新增元素
-        console.log('新增：', element);
+        setDiff(diffMap, eKey, element, 'add')
       }
     }
+    //oldElementMap剩下的都是被删除的
+    for(const eKey in oldElementMap){
+      const removeElement = oldElementMap[eKey]
+      setDiff(diffMap, eKey, removeElement, 'remove', removeElement.code)
+    }
+    await fs.writeFileSync(diffMapPath, utils.stringify(diffMap), {});
   } catch(e) {
 
   }
@@ -64,18 +87,22 @@ const setElementMap = async function(fileMap) {
   try {
     const elementMap = {};
     for (const pKey in fileMap) {
+      
       const file = fileMap[pKey]
-      for (const node of file.nodes) {
-        const eKey = md5(`${file.p}::${node.name}`);
-        const element = {
-          eKey,
-          pKey,
-          e: node.name,
-          p: file.p,
-          code: node.code,
-          type: node.type,
+      const diffType = file.diff
+      if(diffType !== 'remove'){
+        for (const node of file.nodes) {
+          const eKey = md5(`${file.p}::${node.name}`);
+          const element = {
+            eKey,
+            pKey,
+            e: node.name,
+            p: file.p,
+            code: node.code,
+            type: node.type,
+          }
+          elementMap[eKey] = element;
         }
-        elementMap[eKey] = element;
       }
     }
     // 更新变更日志
