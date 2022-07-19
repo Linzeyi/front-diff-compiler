@@ -32,6 +32,16 @@ const getUserid = (platform, version) => {
 };
 
 /**
+ * 获取user name
+ * @param {string} age - 年龄.
+ * @param {string} sex - 性别.
+ * @test 010003
+ */
+const getName = (age, sex) => {
+  return '小明'
+};
+
+/**
  * 获取UA
  * @returns {Number} ua信息
  * @test 100113
