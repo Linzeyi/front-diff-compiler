@@ -1,4 +1,76 @@
 {
+  "6bf56fad1c79efff9e25a149dee799bc": {
+    "eKey": "6bf56fad1c79efff9e25a149dee799bc",
+    "code": "counter: 0",
+    "oldCode": "",
+    "status": "add",
+    "p": "src/App.vue",
+    "e": "counter",
+    "type": "VariableDeclarator",
+    "pKey": "7b952f51d35427e778249c58c32a2773",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "eb150c9d6952f9b0b12aa71b2c959542": {
+    "eKey": "eb150c9d6952f9b0b12aa71b2c959542",
+    "code": "increment() {\n  this.counter += 1;\n  this.$emit('increment', this.counter);\n}",
+    "oldCode": "",
+    "status": "add",
+    "p": "src/App.vue",
+    "e": "increment",
+    "type": "ObjectMethod",
+    "pKey": "7b952f51d35427e778249c58c32a2773",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "af23f270bd51f35e4fd0cd623c25f925": {
+    "eKey": "af23f270bd51f35e4fd0cd623c25f925",
+    "code": "decrement() {\n  this.counter -= 1;\n  this.$emit('decrement', this.counter);\n}",
+    "oldCode": "",
+    "status": "add",
+    "p": "src/App.vue",
+    "e": "decrement",
+    "type": "ObjectMethod",
+    "pKey": "7b952f51d35427e778249c58c32a2773",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "cdb8f6176ac9eeb9e3f4a0fb4b4f6797": {
+    "eKey": "cdb8f6176ac9eeb9e3f4a0fb4b4f6797",
+    "code": "counter: 0",
+    "oldCode": "",
+    "status": "add",
+    "p": "src/components/header.vue",
+    "e": "counter",
+    "type": "VariableDeclarator",
+    "pKey": "5e0f6f1a4f1e3b12a861323ae2a19a90",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "de91a9425deb45dcdf745574e4a19f02": {
+    "eKey": "de91a9425deb45dcdf745574e4a19f02",
+    "code": "/** 相加\r\n * @test 100122\r\n */\nincrement() {\n  this.counter += 1;\n  this.$emit('increment', this.counter);\n}",
+    "oldCode": "",
+    "status": "add",
+    "p": "src/components/header.vue",
+    "e": "increment",
+    "type": "ObjectMethod",
+    "pKey": "5e0f6f1a4f1e3b12a861323ae2a19a90",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "76117c518171f1153a80e6db7581b075": {
+    "eKey": "76117c518171f1153a80e6db7581b075",
+    "code": "/** 相加\r\n * @test 100121\r\n */\ndecrement() {\n  this.counter -= 1;\n  this.$emit('decrement', this.counter);\n}",
+    "oldCode": "",
+    "status": "add",
+    "p": "src/components/header.vue",
+    "e": "decrement",
+    "type": "ObjectMethod",
+    "pKey": "5e0f6f1a4f1e3b12a861323ae2a19a90",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
   "b9b9fe7f7599378b7565ad600cbdad10": {
     "eKey": "b9b9fe7f7599378b7565ad600cbdad10",
     "code": "fxh = 123",
