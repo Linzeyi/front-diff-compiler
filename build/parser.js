@@ -20,7 +20,7 @@ const parserFileAST = function (code, type = 'js') {
       plugins: [
         // enable jsx and flow syntax
         'jsx',
-        'flow'
+        'typescript'
       ]
     });
   }
@@ -102,19 +102,50 @@ function parseVue(ast, nodes) {
           ObjectMethod(path){
             nodes.push({
               name: path.node.key.name,
-              type: 'ObjectMethod',
+              type: 'FunctionDeclaration',
               code: generate(path.node).code,
             });
           },
           ObjectProperty(path){
             nodes.push({
               name: path.node.key.name,
-              type: 'ObjectProperty',
+              type: 'FunctionDeclaration',
+              code: generate(path.node).code,
+            });
+          }
+        })
+      }else if(p.node.key.name === 'computed'){
+        p.traverse({
+          ObjectMethod(path){
+            nodes.push({
+              name: path.node.key.name,
+              type: 'VariableDeclarator',
+              code: generate(path.node).code,
+            });
+          },
+          ObjectProperty(path){
+            nodes.push({
+              name: path.node.key.name,
+              type: 'VariableDeclarator',
               code: generate(path.node).code,
             });
           }
         })
       }
+    },
+    ClassProperty(p){
+      nodes.push({
+        name: p.node.key.name,
+        type: 'VariableDeclarator',
+        code: generate(p.node).code,
+      });
+    },
+    ClassMethod(p){
+      nodes.push({
+        name: p.node.key.name,
+        type: 'FunctionDeclaration',
+        code: generate(p.node).code,
+      });
     }
   })
 }

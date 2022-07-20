@@ -1,25 +1,30 @@
-<template>
-  <div>
-    <normal-cash-coupon v-if="payScene === 'common'"></normal-cash-coupon>
-  </div>
-</template>
-
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
-import { PayCommon } from '../types/payCommon';
-import usePayCashCoupon from '../hooks/coupon/usePayCashCoupon';
-import NormalCashCoupon from '../payscene/normal/NormalCashCoupon.vue';
+import { Foo, Baz, Qux, Fred } from './x'
+// const a = 1
+// function b() {}
+export default class Heal extends Vue{
+  private name:string='name'
+  private age:number=20
 
-export default defineComponent({
-  name: 'PayCashCoupon',
-  setup(props: PayCommon.Data, ctx: PayCommon.SetupContext) {
-    const payCashCoupon = usePayCashCoupon(ctx);
-    return {
-      ...payCashCoupon
-    };
-  },
-  components: {
-    NormalCashCoupon
+  create(){
+    console.log('create');
   }
-});
+
+  getData(){
+    console.log('getData');
+  }
+
+  get computedVari(){
+    return  'computedVari'
+  }
+}
+
 </script>
+
+<template>
+  {{ a as Foo }}
+  {{ Baz }}
+  <Comp v-slot="{ data }: Qux">{{ data }}</Comp>
+  <div v-for="{ z = x as Qux } in list as Fred"/>
+</template>
+         
