@@ -70,7 +70,18 @@ const fomartTestIdArr = function (arr) {
     }, []);
   return Array.from(new Set(tmp));
 };
-
+exports.defineTags = function(dictionary) {
+  // define tags here
+  dictionary.defineTag("test", {
+    mustHaveValue: true,
+    canHaveType: false,
+    canHaveName: true,
+    onTagged: function (doclet, tag) {
+        doclet.test = tag.value;
+        doclet.description = `所关联测试用例：${doclet.test.name}`;
+    }
+  });
+}
 /**
  * jsdoc插件钩子解析所需注释参数
  */
@@ -88,13 +99,15 @@ exports.handlers = {
     const funName = doclet.name;
     const undocumented = doclet.undocumented;
     const description = doclet.description;
-    const tags = doclet.tags;
+    const tags = doclet.test;
     if (!undocumented) {
-      const testTags =
-        (tags && tags.filter((item) => item.originalTitle === "test")) || [];
+      // const testTags =
+      //   (tags && tags.filter((item) => item.originalTitle === "test")) || [];
+      const testTags = tags ? [tags.name] : [];
       // test string 转 Array
       const testTagStringToArr = testTags.map((item) =>
-        item.text.split(" ").join("")
+        // item.text.split(" ").join("")
+        item.split(" ").join("")
       );
       // 获取标准testId数据
       const testIdArr = fomartTestIdArr(testTagStringToArr);
