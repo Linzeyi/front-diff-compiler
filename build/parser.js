@@ -1,8 +1,8 @@
 const parser = require('@babel/parser');
 const generate = require('@babel/generator').default;
 const traverse = require('@babel/traverse').default;
-const vueCompiler = require('vue-template-compiler');
 const fs = require('fs');
+const {parse, compileScript} =  require('vue/compiler-sfc')
 /**
  * @description 解析语法树
  * @param {string} code 源代码
@@ -11,10 +11,10 @@ const fs = require('fs');
  */
 const parserFileAST = function (code, type = 'js') {
   let ast = {};
-  if ('vue' === type) {
-    const vueRes = vueCompiler.parseComponent(code);
-    ast = vueRes;
-  } else {
+  if(type==='vue' || type==='js'){
+    if (type === 'vue') {
+      code = compileScript(parse({source:code})).content
+    }
     ast = parser.parse(code, {
       sourceType: 'module',
       plugins: [
@@ -71,27 +71,52 @@ const getNodeFromAST = function(ast, type = 'js') {
       }
     });
   } else if (type === 'vue') {
-    extractVueMethods(ast, nodes);
+    parseVue(ast, nodes);
   }
   return nodes;
 };
 
-function extractVueMethods(ast, nodes) {
-  let content = ast.script.content;
-  content = content.replace(/\s+/g, '');
-  content = content.endsWith(';') ? content.slice(0, -1) : content;
-  let methods = content.match(/^.*methods:{(.*)}}$/);
-  methods = methods?.[1];
-  if (methods?.[1]) {
-    methods = methods.endsWith(',') ? methods.slice(0, -1) : methods;
-    methods.split(',').map(method => {
-      const methodName = method.match(/^(.*)\(\).*$/);
-      nodes.push({
-        name: methodName?.[1] || '',
-        type: 'func'
-      });
-    });
-  }
+/**
+ * 解析vue文件中的变量和方法
+ * @param {*} ast 
+ * @param {*} nodes 
+ */
+function parseVue(ast, nodes) {
+  traverse(ast,{
+    ObjectMethod(p){
+      if(p.node.key.name==='data'){
+        p.traverse({
+          ObjectProperty(path){
+            nodes.push({
+              name: path.node.key.name,
+              type: 'VariableDeclarator',
+              code: generate(path.node).code,
+            });
+          }
+        })
+      }
+    },
+    ObjectProperty(p){
+      if(p.node.key.name==='methods'){
+        p.traverse({
+          ObjectMethod(path){
+            nodes.push({
+              name: path.node.key.name,
+              type: 'ObjectMethod',
+              code: generate(path.node).code,
+            });
+          },
+          ObjectProperty(path){
+            nodes.push({
+              name: path.node.key.name,
+              type: 'ObjectProperty',
+              code: generate(path.node).code,
+            });
+          }
+        })
+      }
+    }
+  })
 }
 
 module.exports = {
