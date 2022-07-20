@@ -2,7 +2,7 @@
   "tags": {
     "allowUnknownTags": true,
     "dictionaries": [
-      "jsdoc"
+      "jsdoc", "closure"
     ]
   },
   "recurseDepth": 10,
