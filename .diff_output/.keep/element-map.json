@@ -1,0 +1,121 @@
+{
+  "cdb8f6176ac9eeb9e3f4a0fb4b4f6797": {
+    "eKey": "cdb8f6176ac9eeb9e3f4a0fb4b4f6797",
+    "pKey": "5e0f6f1a4f1e3b12a861323ae2a19a90",
+    "e": "counter",
+    "p": "src/components/header.vue",
+    "code": "counter: 0",
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "3502240f89fd8ca407963c538d5dee20": {
+    "eKey": "3502240f89fd8ca407963c538d5dee20",
+    "pKey": "5e0f6f1a4f1e3b12a861323ae2a19a90",
+    "e": "message",
+    "p": "src/components/header.vue",
+    "code": "message() {\n  return `Current value is ${this.counter}`;\n}",
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "de91a9425deb45dcdf745574e4a19f02": {
+    "eKey": "de91a9425deb45dcdf745574e4a19f02",
+    "pKey": "5e0f6f1a4f1e3b12a861323ae2a19a90",
+    "e": "increment",
+    "p": "src/components/header.vue",
+    "code": "/** 相加\n * @test 100122\n */\nincrement() {\n  this.counter += 1;\n  this.$emit('increment', this.counter);\n}",
+    "type": "FunctionDeclaration",
+    "funDesc": "所关联测试用例：100122",
+    "testIdArr": [
+      {
+        "testId": "100122",
+        "testDesc": "排序功能"
+      }
+    ]
+  },
+  "76117c518171f1153a80e6db7581b075": {
+    "eKey": "76117c518171f1153a80e6db7581b075",
+    "pKey": "5e0f6f1a4f1e3b12a861323ae2a19a90",
+    "e": "decrement",
+    "p": "src/components/header.vue",
+    "code": "/** 相减\n * @test 100121\n */\ndecrement() {\n  this.counter -= 1;\n  this.$emit('decrement', this.counter);\n}",
+    "type": "FunctionDeclaration",
+    "funDesc": "所关联测试用例：100121",
+    "testIdArr": [
+      {
+        "testId": "100121",
+        "testDesc": "排序功能"
+      }
+    ]
+  },
+  "5ec32f7274260f73121fe35a836ce657": {
+    "eKey": "5ec32f7274260f73121fe35a836ce657",
+    "pKey": "104123185a8186088d4e243227747772",
+    "e": "func1",
+    "p": "src/utils/common.js",
+    "code": "/**\n * 测试方法一\n * @test 10011\n */\nfunction func1() {\n  // do something\n  var func1Name = \"func1Name\";\n  func1Name = \"changeFunc1Name\";\n  return func1Name;\n}\n/**\n * 测试方法二\n * @test 10012,100114\n * @test 100112,100111\n */",
+    "type": "FunctionDeclaration",
+    "funDesc": "所关联测试用例：10011",
+    "testIdArr": [
+      {
+        "testId": "10011",
+        "testDesc": "首页大盘估值k线图"
+      }
+    ]
+  },
+  "f514dc9f66dd56615f1f0fde34d5dfc0": {
+    "eKey": "f514dc9f66dd56615f1f0fde34d5dfc0",
+    "pKey": "104123185a8186088d4e243227747772",
+    "e": "func1Name",
+    "p": "src/utils/common.js",
+    "code": "func1Name = \"func1Name\"",
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "b2c6b9cc7c600d9dc8c4b6a1a389e56f": {
+    "eKey": "b2c6b9cc7c600d9dc8c4b6a1a389e56f",
+    "pKey": "104123185a8186088d4e243227747772",
+    "e": "func2",
+    "p": "src/utils/common.js",
+    "code": "func2 = function () {\n  let time = new Date();\n  console.log(time);\n}",
+    "type": "VariableDeclarator",
+    "funDesc": "所关联测试用例：100112,100111",
+    "testIdArr": [
+      {
+        "testId": "100112",
+        "testDesc": "下拉框功能切换"
+      },
+      {
+        "testId": "100111",
+        "testDesc": "数据展示"
+      }
+    ]
+  },
+  "f7984bf85b95c6193c6c46ba819c3f9a": {
+    "eKey": "f7984bf85b95c6193c6c46ba819c3f9a",
+    "pKey": "104123185a8186088d4e243227747772",
+    "e": "time",
+    "p": "src/utils/common.js",
+    "code": "time = new Date()",
+    "type": "VariableDeclarator",
+    "funDesc": "暂无描述",
+    "testIdArr": []
+  },
+  "861a6941737751d05d9ca1e33113b3c5": {
+    "eKey": "861a6941737751d05d9ca1e33113b3c5",
+    "pKey": "104123185a8186088d4e243227747772",
+    "e": "func3",
+    "p": "src/utils/common.js",
+    "code": "func3 = type => {\n  return '1' === type;\n}",
+    "type": "VariableDeclarator",
+    "funDesc": "所关联测试用例：10013",
+    "testIdArr": [
+      {
+        "testId": "10013",
+        "testDesc": "首页百股排行"
+      }
+    ]
+  }
+}
