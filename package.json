@@ -23,6 +23,7 @@
     "jsondiffpatch": "^0.4.1",
     "md5-js": "^0.0.3",
     "nyc": "^15.1.0",
+    "postcss": "^8.4.14",
     "vue-loader": "^15.10.0",
     "vue-template-compiler": "^2.6.14",
     "webpack": "^5.73.0",
@@ -31,10 +32,10 @@
   },
   "dependencies": {
     "@babel/traverse": "^7.18.8",
+    "@vue/compiler-sfc": "^3.2.37",
     "jsdoc": "^3.6.10",
     "jsdoc-vuejs": "^4.0.0",
     "minami": "^1.2.3",
-    "vue": "^2.6.14",
-    "@vue/compiler-sfc": "^3.2.37"
+    "vue": "^2.6.14"
   }
 }
