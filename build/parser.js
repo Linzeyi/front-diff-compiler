@@ -2,7 +2,7 @@ const parser = require('@babel/parser');
 const generate = require('@babel/generator').default;
 const traverse = require('@babel/traverse').default;
 const fs = require('fs');
-const {parse, compileScript} =  require('vue/compiler-sfc')
+const {parse, compileScript} =  require('@vue/compiler-sfc')
 /**
  * @description 解析语法树
  * @param {string} code 源代码
@@ -13,7 +13,7 @@ const parserFileAST = function (code, type = 'js') {
   let ast = {};
   if(type==='vue' || type==='js'){
     if (type === 'vue') {
-      code = compileScript(parse({source:code})).content
+      code = compileScript(parse(code).descriptor,{id:'xxxxx'}).content
     }
     ast = parser.parse(code, {
       sourceType: 'module',
