@@ -119,7 +119,7 @@ exports.handlers = {
         type,
         funName,
         testIdArr,
-        funDesc: description || '暂无描述',
+        desc: description || '暂无描述',
         testDescEndLineNo: lineno,
       };
       // 收集每一次注释产生数据

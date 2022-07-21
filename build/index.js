@@ -127,7 +127,7 @@ const setElementMap = async function(fileMap) {
           const eKey = md5(`${file.p}::${node.name}`);
           const currentTestJson = diffOptions.collectTestIdJson[eKey];
           const testIdArr = currentTestJson ? currentTestJson.testIdArr : [];
-          const funDesc = currentTestJson ? currentTestJson.funDesc : '暂无描述';
+          const desc = currentTestJson ? currentTestJson.desc : '暂无描述';
           const element = {
             eKey,
             pKey,
@@ -135,7 +135,7 @@ const setElementMap = async function(fileMap) {
             p: file.p,
             code: node.code,
             type: node.type,
-            funDesc,
+            desc,
             testIdArr: testIdArr,
           }
           elementMap[eKey] = element;
