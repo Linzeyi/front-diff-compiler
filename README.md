@@ -1,6 +1,14 @@
 # front-diff-compiler
 
-前端代码差异分析与用例绑定工具
+前端
+
+## 演示
+
+1. 将该项目上传至master分支；
+2. fork新的开发分支，例如feature，checkout至该分支；
+3. 在src目录里修改文件，提交commit，制造代码变更的场景（./demo/目录下放了一些模板案例，将里面的src替换当前src目录，即可快速营造add、change、remove三种变更场景）
+4. 执行npm run doc，差异分析报告会输出至./diff_output/diff-map.json文件里；
+5. 如何模拟上一次已提交的差异报告：将./diff_output/element-map.json拷贝一份至./diff_output/.keep/文件夹内，合到master，然后切回开发分支，修改src制造变更，重新执行npm run doc。
 
 ## 启动
 
