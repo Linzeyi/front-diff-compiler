@@ -5,15 +5,13 @@ const md5JS = require('md5-js');
 const jsondiffpatch = require('jsondiffpatch');
 const utils = require('./utils');
 const { parserFileAST, traverseAST, getNodeFromAST } = require('./parser');
-const { OUTPUT_PATH, KEEP_PATH, FILE_MAP_FILE, ELEMENT_MAP_FILE, DIFF_MAP_FILE } = require('./constant');
+const { OUTPUT_PATH, KEEP_PATH, FILE_MAP_FILE, DIFF_MAP_FILE} = require('./constant');
 // 文件关系日志文件名
 const fileMapPath = path.resolve(path.join(OUTPUT_PATH, FILE_MAP_FILE));
-// 基本元素关系日志路径
-const elementMapPath = path.resolve(path.join(OUTPUT_PATH, ELEMENT_MAP_FILE));
-// 基本元素关系日志存储路径
-const elementMapKeepPath = path.resolve(path.join(OUTPUT_PATH, KEEP_PATH, ELEMENT_MAP_FILE));
 // 差异报告
-const diffMapPath = path.resolve(path.join(OUTPUT_PATH,DIFF_MAP_FILE));
+const diffMapPath = path.resolve(path.join(OUTPUT_PATH, DIFF_MAP_FILE));
+// 上一次保存的差异报告
+const diffMapKeepPath = path.resolve(path.join(OUTPUT_PATH, KEEP_PATH, DIFF_MAP_FILE));
 
 // 配置项
 let diffOptions = {
@@ -81,33 +79,34 @@ const setDiffMap = function(diffMap, key, element, status, oldCode = ''){
 const setDiffReport = async function(elementMap) {
   try {
     let diffMap = {};
-    // 上一次的变更记录
-    const oldElementString = await fs.readFileSync(elementMapKeepPath, 'utf-8')
-    let elementKeepMap = JSON.parse(oldElementString);
-    const oldElementMap = JSON.parse(oldElementString);
+    const oldDiffMapStr = await fs.readFileSync(diffMapKeepPath, 'utf-8');
+    // 上一次的差异分析报告
+    const oldDiffMap = JSON.parse(oldDiffMapStr);
     for(const eKey in elementMap) {
       const element = elementMap[eKey];
-      const keepElement = elementKeepMap[eKey];
-      if (keepElement) {
+      const oldElement = oldDiffMap[eKey];
+      if (oldElement) {
         // 该元素存在上一次的扫描结果，进行差异分析，更新
-        if(element.code !== keepElement.code){
-          setDiffMap(diffMap,eKey, element, 'change', keepElement.code)
+        if(element.code !== oldElement.code){
+          setDiffMap(diffMap,eKey, element, 'change', oldElement.code)
         }
         //删除所有存在的，剩下的就是删除的
-        delete oldElementMap[eKey]
+        delete oldDiffMap[eKey]
       } else {
         // 该元素为新增元素
         setDiffMap(diffMap, eKey, element, 'add')
       }
     }
-    //oldElementMap剩下的都是被删除的
-    for(const eKey in oldElementMap){
-      const removeElement = oldElementMap[eKey]
+    //oldDiffMap剩下的都是被删除的
+    for(const eKey in oldDiffMap){
+      const removeElement = oldDiffMap[eKey]
       setDiffMap(diffMap, eKey, removeElement, 'remove', removeElement.code)
     }
+    console.log('> set diff-map over...')
     await fs.writeFileSync(diffMapPath, utils.stringify(diffMap), {});
-  } catch(e) {
-
+  } catch(err) {
+    // 若获取不到上一次提交的差异分析报告，则直接输出元素分析报告
+    fs.writeFileSync(diffMapPath, utils.stringify(elementMap), {});
   }
 }
 
@@ -142,8 +141,7 @@ const setElementMap = async function(fileMap) {
         }
       }
     }
-    // 更新变更日志
-    await fs.writeFileSync(elementMapPath, utils.stringify(elementMap), {});
+    console.log('> set element-map over...')
     setDiffReport(elementMap);
   } catch(e) {
     console.log(err);
@@ -216,6 +214,7 @@ const setFileMap = async function(diffFilePaths) {
       // 更新变更日志
       fs.writeFileSync(fileMapPath, utils.stringify(fileMap), {});
       setElementMap(fileMap);
+      console.log('> set file-map over...')
     }
   }
 };
