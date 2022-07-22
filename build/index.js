@@ -80,7 +80,7 @@ const setDiffReport = async function(elementMap) {
   try {
     let diffMap = {};
     const oldDiffMapStr = await fs.readFileSync(diffMapKeepPath, 'utf-8');
-    // 上一次的变更记录
+    // 上一次的差异分析报告
     const oldDiffMap = JSON.parse(oldDiffMapStr);
     for(const eKey in elementMap) {
       const element = elementMap[eKey];
@@ -102,9 +102,11 @@ const setDiffReport = async function(elementMap) {
       const removeElement = oldDiffMap[eKey]
       setDiffMap(diffMap, eKey, removeElement, 'remove', removeElement.code)
     }
+    console.log('> set diff-map over...')
     await fs.writeFileSync(diffMapPath, utils.stringify(diffMap), {});
-  } catch(e) {
-
+  } catch(err) {
+    // 若获取不到上一次提交的差异分析报告，则直接输出元素分析报告
+    fs.writeFileSync(diffMapPath, utils.stringify(elementMap), {});
   }
 }
 
@@ -139,6 +141,7 @@ const setElementMap = async function(fileMap) {
         }
       }
     }
+    console.log('> set element-map over...')
     setDiffReport(elementMap);
   } catch(e) {
     console.log(err);
@@ -211,6 +214,7 @@ const setFileMap = async function(diffFilePaths) {
       // 更新变更日志
       fs.writeFileSync(fileMapPath, utils.stringify(fileMap), {});
       setElementMap(fileMap);
+      console.log('> set file-map over...')
     }
   }
 };
