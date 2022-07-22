@@ -1,4 +1,4 @@
-var compiler = require("vue-template-compiler");
+const compiler = require("vue-template-compiler");
 const diffCompiler = require("../build");
 const nodePath = require("path");
 const fs = require("fs");
@@ -127,7 +127,6 @@ exports.handlers = {
     }
   },
   parseComplete: function () {
-    console.log("collectTestIdJson", collectTestIdJson);
     // 启动差异分析器
     diffCompiler({
       projectName: "thsc-front-project-pod",

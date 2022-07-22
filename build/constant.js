@@ -5,8 +5,6 @@ module.exports = {
   KEEP_PATH: '/.keep',
   // 文件关系日志文件名
   FILE_MAP_FILE: 'file-map.json',
-  // 基本元素关系日志文件名
-  ELEMENT_MAP_FILE: 'element-map.json',
   // 差异报告文件名
   DIFF_MAP_FILE: 'diff-map.json',
 }

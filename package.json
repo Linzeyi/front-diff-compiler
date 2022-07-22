@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "diff-map": "node ./diff.config.js",
     "diff": "jsdoc -r -c .jsdoc.conf.json",
     "serve": "npm run diff && nyc webpack-dev-server",
     "build": "npm run diff && nyc webpack build --mode production"

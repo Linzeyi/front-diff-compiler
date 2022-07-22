@@ -1,20 +1,8 @@
 # front-diff-compiler
 
-前端
+前端代码差异分析与用例绑定工具
 
-## 演示
-
-1. 将该项目上传至master分支；
-2. fork新的开发分支，例如feature，checkout至该分支；
-3. 在src目录里修改文件，提交commit，制造代码变更的场景（./demo/目录下放了一些模板案例，将里面的src替换当前src目录，即可快速营造add、change、remove三种变更场景）
-4. 执行npm run doc，差异分析报告会输出至./diff_output/diff-map.json文件里；
-5. 如何模拟上一次已提交的差异报告：将./diff_output/element-map.json拷贝一份至./diff_output/.keep/文件夹内，合到master，然后切回开发分支，修改src制造变更，重新执行npm run diff。
-
-## 启动
-
-`npm run diff-map`
-
-## 方案
+## 方案设计
 
 1. git diff 获取差异文件，fs扫描文件获取源代码；
 2. 利用babel-paser、vue-template-compiler等工具将源码解析为AST格式，输出**AST日志**；
@@ -25,14 +13,25 @@
 	3. 问题：怎么定义删除的元素？
 5. 分析**关系日志**，提取用例状态，结合绑定元素生成**测试报告**（报告包含：变更元素内容，关联用例，用例状态等）
 
-### 2. 绑定测试用例-代码函数对应关系方案
-### 启动
+## 演示流程
+
+1. 将该项目上传至master分支；
+2. fork新的开发分支，例如feature，checkout至该分支；
+3. 在src目录里修改文件，提交commit，制造代码变更的场景（./demo/目录下放了一些模板案例，将里面的src替换当前src目录，即可快速营造add、change、remove三种变更场景）
+4. 执行npm run doc，差异分析报告会输出至./diff_output/diff-map.json文件里；
+5. 如何模拟上一次已提交的差异报告：将./diff_output/element-map.json拷贝一份至./diff_output/.keep/文件夹内，合到master，然后切回开发分支，修改src制造变更，重新执行npm run diff。
+
+## 启动指令
 
 `npm run diff`
 
-### 方案
+### 脚本执行顺序
+
 1. 通过jsdoc-vuejs + jsdoc完成对代码函数解析
-
 2. 在jsdoc-vuejs中通过jsdoc-plugin暴露的方法newDoclet来获取对应目录下的函数-注释对应关系。解析@test 字符串/数据，生成json数据。
-
 3. 通过jsdoc-plugin暴露的方法parseComplete当数据解析完成时，启动差异分析器 diffCompile，将获取的数据传入并解析，在变更文件映射关系-setElement中完成数据组装
+
+
+### jsdoc如何提炼注释标签？
+1. jsdoc插件可以通过导出一个defineTags函数来定义标签`@test`,`canHaveNam`设置为true，来接受标签的name属性 
+2. 当标签被发现时，将@test的name属性赋值给doclet的describe，通过`onTagged`实现
